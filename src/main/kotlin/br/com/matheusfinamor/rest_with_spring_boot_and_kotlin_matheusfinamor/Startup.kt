@@ -4,8 +4,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
 
 @SpringBootApplication
-class RestWithSpringBootAndKotlinMatheusfinamorApplication
+class Startup
 
 fun main(args: Array<String>) {
-	runApplication<RestWithSpringBootAndKotlinMatheusfinamorApplication>(*args)
+	runApplication<Startup>(*args)
 }
