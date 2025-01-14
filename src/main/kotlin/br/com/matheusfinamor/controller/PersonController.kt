@@ -23,10 +23,18 @@ class PersonController() {
         produces = [MediaType.APPLICATION_JSON_VALUE]
     )
             /** @PathVariable recupera dados da URL */
-    fun sum(
+    fun findById(
         @PathVariable(value = "id") id: Long
     ): Person {
         return service.findById(id)
+    }
+
+    @RequestMapping(
+        method = [RequestMethod.GET],
+        produces = [MediaType.APPLICATION_JSON_VALUE]
+    )
+    fun findAll(): List<Person> {
+        return service.findByAll()
     }
 
 }

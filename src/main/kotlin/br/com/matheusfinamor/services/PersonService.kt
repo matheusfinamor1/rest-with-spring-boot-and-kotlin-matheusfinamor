@@ -11,13 +11,35 @@ class PersonService {
     private val counter: AtomicLong = AtomicLong()
     private val logger = Logger.getLogger(PersonService::class.java.name)
 
-    fun findById(id: Long): Person{
+    fun findById(id: Long): Person {
         logger.info("Finding one person")
 
         val person = Person(
             id = counter.incrementAndGet(),
             firstName = "Matheus",
             lastName = "Finamor",
+            address = "Santiago - RS",
+            gender = "Male"
+        )
+        return person
+    }
+
+    fun findByAll(): List<Person> {
+        logger.info("Finding all people")
+
+        val persons: MutableList<Person> = ArrayList()
+        for (i in 0..7) {
+            val person = mockPerson(i)
+            persons.add(person)
+        }
+        return persons
+    }
+
+    private fun mockPerson(i: Int): Person {
+        val person = Person(
+            id = counter.incrementAndGet(),
+            firstName = "Matheus $i",
+            lastName = "Finamor $i",
             address = "Santiago - RS",
             gender = "Male"
         )
