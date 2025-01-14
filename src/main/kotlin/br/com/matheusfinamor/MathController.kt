@@ -1,4 +1,4 @@
-package br.com.matheusfinamor.rest_with_spring_boot_and_kotlin_matheusfinamor
+package br.com.matheusfinamor
 
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.RequestMapping
@@ -8,15 +8,14 @@ import java.util.concurrent.atomic.AtomicLong
 @RestController
 class MathController {
 
-    val counter: AtomicLong = AtomicLong()
-
     @RequestMapping(value = ["/sum/{numberOne}/{numberTwo}"])
             /** @PathVariable recupera dados da URL */
     fun sum(
         @PathVariable(value = "numberOne") numberOne: String?,
         @PathVariable(value = "numberTwo") numberTwo: String?
     ): Double {
-        if (!isNumeric(numberOne) || !isNumeric(numberTwo)) throw Exception()
+        if (!isNumeric(numberOne) || !isNumeric(numberTwo))
+            throw UnsupportedOperationException("Please set a numeric value")
         return convertToDouble(numberOne) + convertToDouble(numberTwo)
     }
 
