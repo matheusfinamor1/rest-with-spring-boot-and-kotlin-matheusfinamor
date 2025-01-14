@@ -1,4 +1,4 @@
-package br.com.matheusfinamor.rest_with_spring_boot_and_kotlin_matheusfinamor
+package br.com.matheusfinamor
 
 import org.junit.jupiter.api.Test
 import org.springframework.boot.test.context.SpringBootTest
