@@ -19,6 +19,50 @@ class MathController {
         return convertToDouble(numberOne) + convertToDouble(numberTwo)
     }
 
+    @RequestMapping(value = ["/sub/{numberOne}/{numberTwo}"])
+            /** @PathVariable recupera dados da URL */
+    fun sub(
+        @PathVariable(value = "numberOne") numberOne: String?,
+        @PathVariable(value = "numberTwo") numberTwo: String?
+    ): Double {
+        if (!isNumeric(numberOne) || !isNumeric(numberTwo))
+            throw UnsupportedOperationException("Please set a numeric value")
+        return convertToDouble(numberOne) - convertToDouble(numberTwo)
+    }
+
+    @RequestMapping(value = ["/mult/{numberOne}/{numberTwo}"])
+            /** @PathVariable recupera dados da URL */
+    fun mult(
+        @PathVariable(value = "numberOne") numberOne: String?,
+        @PathVariable(value = "numberTwo") numberTwo: String?
+    ): Double {
+        if (!isNumeric(numberOne) || !isNumeric(numberTwo))
+            throw UnsupportedOperationException("Please set a numeric value")
+        return (convertToDouble(numberOne) * convertToDouble(numberTwo))
+    }
+
+    @RequestMapping(value = ["/div/{numberOne}/{numberTwo}"])
+            /** @PathVariable recupera dados da URL */
+    fun div(
+        @PathVariable(value = "numberOne") numberOne: String?,
+        @PathVariable(value = "numberTwo") numberTwo: String?
+    ): Double {
+        if (!isNumeric(numberOne) || !isNumeric(numberTwo))
+            throw UnsupportedOperationException("Please set a numeric value")
+        return (convertToDouble(numberOne) / convertToDouble(numberTwo))
+    }
+
+    @RequestMapping(value = ["/med/{numberOne}/{numberTwo}"])
+            /** @PathVariable recupera dados da URL */
+    fun med(
+        @PathVariable(value = "numberOne") numberOne: String?,
+        @PathVariable(value = "numberTwo") numberTwo: String?
+    ): Double {
+        if (!isNumeric(numberOne) || !isNumeric(numberTwo))
+            throw UnsupportedOperationException("Please set a numeric value")
+        return (convertToDouble(numberOne) + convertToDouble(numberTwo)) / 2
+    }
+
     private fun convertToDouble(strNumber: String?): Double {
         if (strNumber.isNullOrBlank()) return 0.0
         val number = strNumber.replace(",".toRegex(), ".")
