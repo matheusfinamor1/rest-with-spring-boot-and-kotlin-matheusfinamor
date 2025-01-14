@@ -4,6 +4,7 @@ import br.com.matheusfinamor.model.Person
 import br.com.matheusfinamor.services.PersonService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.MediaType
+import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 
 @RestController
@@ -14,17 +15,13 @@ class PersonController() {
     @Autowired
     private lateinit var service: PersonService
 
-    @RequestMapping(
-        method = [RequestMethod.GET],
-        produces = [MediaType.APPLICATION_JSON_VALUE]
-    )
+    @GetMapping(produces = [MediaType.APPLICATION_JSON_VALUE])
     fun findAll(): List<Person> {
         return service.findByAll()
     }
 
-    @RequestMapping(
+    @GetMapping(
         value = ["/{id}"],
-        method = [RequestMethod.GET],
         produces = [MediaType.APPLICATION_JSON_VALUE]
     )
             /** @PathVariable recupera dados da URL */
@@ -34,8 +31,7 @@ class PersonController() {
         return service.findById(id)
     }
 
-    @RequestMapping(
-        method = [RequestMethod.POST],
+    @PostMapping(
         produces = [MediaType.APPLICATION_JSON_VALUE],
         consumes = [MediaType.APPLICATION_JSON_VALUE]
     )
@@ -46,8 +42,7 @@ class PersonController() {
         return service.create(person)
     }
 
-    @RequestMapping(
-        method = [RequestMethod.PUT],
+    @PutMapping(
         produces = [MediaType.APPLICATION_JSON_VALUE],
         consumes = [MediaType.APPLICATION_JSON_VALUE]
     )
@@ -58,11 +53,13 @@ class PersonController() {
         return service.update(person)
     }
 
-    @RequestMapping(
+    @DeleteMapping(
         value = ["/{id}"],
-        method = [RequestMethod.DELETE],
         produces = [MediaType.APPLICATION_JSON_VALUE]
     )
             /** @PathVariable recupera dados da URL */
-    fun delete(@PathVariable(value = "id") id: Long) = service.delete(id)
+    fun delete(@PathVariable(value = "id") id: Long): ResponseEntity<*> {
+        service.delete(id)
+        return ResponseEntity.noContent().build<Any>()
+    }
 }
