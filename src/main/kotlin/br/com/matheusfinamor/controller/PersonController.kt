@@ -1,7 +1,6 @@
 package br.com.matheusfinamor.controller
 
 import br.com.matheusfinamor.data.vo.v1.PersonVO
-import br.com.matheusfinamor.model.Person
 import br.com.matheusfinamor.services.PersonService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.MediaType
@@ -16,9 +15,10 @@ class PersonController() {
     @Autowired
     private lateinit var service: PersonService
 
+
     @GetMapping(produces = [MediaType.APPLICATION_JSON_VALUE])
     fun findAll(): List<PersonVO> {
-        return service.findByAll()
+        return service.findAll()
     }
 
     @GetMapping(
