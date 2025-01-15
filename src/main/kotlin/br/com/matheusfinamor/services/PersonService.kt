@@ -2,7 +2,7 @@ package br.com.matheusfinamor.services
 
 import br.com.matheusfinamor.data.vo.v1.PersonVO
 import br.com.matheusfinamor.exceptions.ResourceNotFoundException
-import br.com.matheusfinamor.mapper.DozerMapper
+import br.com.matheusfinamor.mapper.ModelMapperObject
 import br.com.matheusfinamor.model.Person
 import br.com.matheusfinamor.repository.PersonRepository
 import org.springframework.beans.factory.annotation.Autowired
@@ -21,19 +21,19 @@ class PersonService {
         logger.info("Finding all people")
 
         val people = repository.findAll()
-        return DozerMapper.parseListObject(people, PersonVO::class.java)
+        return ModelMapperObject.parseListObject(people, PersonVO::class.java)
     }
 
     fun findById(id: Long): PersonVO {
         logger.info("Finding one person")
         val person = repository.findById(id).orElseThrow { ResourceNotFoundException("No records found for this ID") }
-        return DozerMapper.parseObject(person, PersonVO::class.java)
+        return ModelMapperObject.parseObject(person, PersonVO::class.java)
     }
 
     fun create(person: PersonVO): PersonVO {
         logger.info("Creating one person with name ${person.firstName}")
-        val entity: Person = DozerMapper.parseObject(person, Person::class.java)
-        return DozerMapper.parseObject(repository.save(entity), PersonVO::class.java)
+        val entity: Person = ModelMapperObject.parseObject(person, Person::class.java)
+        return ModelMapperObject.parseObject(repository.save(entity), PersonVO::class.java)
     }
 
     fun update(person: PersonVO): PersonVO {
@@ -47,7 +47,7 @@ class PersonService {
         entity.address = person.address
         entity.gender = person.gender
 
-        return DozerMapper.parseObject(repository.save(entity), PersonVO::class.java)
+        return ModelMapperObject.parseObject(repository.save(entity), PersonVO::class.java)
 
     }
 
