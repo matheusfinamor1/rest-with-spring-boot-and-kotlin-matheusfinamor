@@ -1,5 +1,6 @@
 package br.com.matheusfinamor.controller
 
+import br.com.matheusfinamor.data.vo.v1.PersonVO
 import br.com.matheusfinamor.model.Person
 import br.com.matheusfinamor.services.PersonService
 import org.springframework.beans.factory.annotation.Autowired
@@ -16,7 +17,7 @@ class PersonController() {
     private lateinit var service: PersonService
 
     @GetMapping(produces = [MediaType.APPLICATION_JSON_VALUE])
-    fun findAll(): List<Person> {
+    fun findAll(): List<PersonVO> {
         return service.findByAll()
     }
 
@@ -27,7 +28,7 @@ class PersonController() {
             /** @PathVariable recupera dados da URL */
     fun findById(
         @PathVariable(value = "id") id: Long
-    ): Person {
+    ): PersonVO {
         return service.findById(id)
     }
 
@@ -37,8 +38,8 @@ class PersonController() {
     )
             /** @RequestBody recupera dados do Body */
     fun create(
-        @RequestBody person: Person
-    ): Person {
+        @RequestBody person: PersonVO
+    ): PersonVO {
         return service.create(person)
     }
 
@@ -48,8 +49,8 @@ class PersonController() {
     )
             /** @RequestBody recupera dados do Body */
     fun update(
-        @RequestBody person: Person
-    ): Person {
+        @RequestBody person: PersonVO
+    ): PersonVO {
         return service.update(person)
     }
 
