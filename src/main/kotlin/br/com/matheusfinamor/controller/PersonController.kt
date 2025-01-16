@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.MediaType
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
+import br.com.matheusfinamor.data.vo.v2.PersonVO as PersonVOV2
 
 @RestController
 @RequestMapping("/person")
@@ -41,6 +42,18 @@ class PersonController() {
         @RequestBody person: PersonVO
     ): PersonVO {
         return service.create(person)
+    }
+
+    @PostMapping(
+        value = ["/v2"],
+        produces = [MediaType.APPLICATION_JSON_VALUE],
+        consumes = [MediaType.APPLICATION_JSON_VALUE]
+    )
+            /** @RequestBody recupera dados do Body */
+    fun createV2(
+        @RequestBody person: PersonVOV2
+    ): PersonVOV2 {
+        return service.createV2(person)
     }
 
     @PutMapping(
