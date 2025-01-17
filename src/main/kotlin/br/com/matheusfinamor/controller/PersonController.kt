@@ -19,7 +19,7 @@ class PersonController() {
 
     @GetMapping(
         value = ["/v1"],
-        produces = [MediaType.APPLICATION_JSON_VALUE]
+        produces = [MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE]
     )
     fun findAll(): List<PersonVO> {
         return service.findAll()
@@ -27,7 +27,7 @@ class PersonController() {
 
     @GetMapping(
         value = ["/v1/{id}"],
-        produces = [MediaType.APPLICATION_JSON_VALUE]
+        produces = [MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE]
     )
             /** @PathVariable recupera dados da URL */
     fun findById(
@@ -38,8 +38,8 @@ class PersonController() {
 
     @PostMapping(
         value = ["/v1"],
-        produces = [MediaType.APPLICATION_JSON_VALUE],
-        consumes = [MediaType.APPLICATION_JSON_VALUE]
+        produces = [MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE],
+        consumes = [MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE]
     )
             /** @RequestBody recupera dados do Body */
     fun create(
@@ -50,8 +50,8 @@ class PersonController() {
 
     @PostMapping(
         value = ["/v2"],
-        produces = [MediaType.APPLICATION_JSON_VALUE],
-        consumes = [MediaType.APPLICATION_JSON_VALUE]
+        produces = [MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE],
+        consumes = [MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE]
     )
             /** @RequestBody recupera dados do Body */
     fun createV2(
@@ -62,8 +62,8 @@ class PersonController() {
 
     @PutMapping(
         value = ["/v1"],
-        produces = [MediaType.APPLICATION_JSON_VALUE],
-        consumes = [MediaType.APPLICATION_JSON_VALUE]
+        produces = [MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE],
+        consumes = [MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE]
     )
             /** @RequestBody recupera dados do Body */
     fun update(
@@ -74,7 +74,7 @@ class PersonController() {
 
     @DeleteMapping(
         value = ["/v1/{id}"],
-        produces = [MediaType.APPLICATION_JSON_VALUE]
+        produces = [MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE]
     )
             /** @PathVariable recupera dados da URL */
     fun delete(@PathVariable(value = "id") id: Long): ResponseEntity<*> {
