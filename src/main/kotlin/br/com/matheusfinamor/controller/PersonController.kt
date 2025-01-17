@@ -17,13 +17,16 @@ class PersonController() {
     private lateinit var service: PersonService
 
 
-    @GetMapping(produces = [MediaType.APPLICATION_JSON_VALUE])
+    @GetMapping(
+        value = ["/v1"],
+        produces = [MediaType.APPLICATION_JSON_VALUE]
+    )
     fun findAll(): List<PersonVO> {
         return service.findAll()
     }
 
     @GetMapping(
-        value = ["/{id}"],
+        value = ["/v1/{id}"],
         produces = [MediaType.APPLICATION_JSON_VALUE]
     )
             /** @PathVariable recupera dados da URL */
@@ -34,6 +37,7 @@ class PersonController() {
     }
 
     @PostMapping(
+        value = ["/v1"],
         produces = [MediaType.APPLICATION_JSON_VALUE],
         consumes = [MediaType.APPLICATION_JSON_VALUE]
     )
@@ -57,6 +61,7 @@ class PersonController() {
     }
 
     @PutMapping(
+        value = ["/v1"],
         produces = [MediaType.APPLICATION_JSON_VALUE],
         consumes = [MediaType.APPLICATION_JSON_VALUE]
     )
@@ -68,7 +73,7 @@ class PersonController() {
     }
 
     @DeleteMapping(
-        value = ["/{id}"],
+        value = ["/v1/{id}"],
         produces = [MediaType.APPLICATION_JSON_VALUE]
     )
             /** @PathVariable recupera dados da URL */
