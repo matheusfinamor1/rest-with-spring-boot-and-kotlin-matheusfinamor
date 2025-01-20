@@ -1,14 +1,14 @@
 package br.com.matheusfinamor
 
 import br.com.matheusfinamor.data.vo.v1.PersonVO
-import br.com.matheusfinamor.mapper.ModelMapperObject
+import br.com.matheusfinamor.mapper.DozerMapper
 import br.com.matheusfinamor.mocks.MockPerson
 import br.com.matheusfinamor.model.Person
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 
-class ModelMapperObjectTest {
+class ModelMappingObjectTest {
 
     var inputObject: MockPerson? = null
 
@@ -19,8 +19,8 @@ class ModelMapperObjectTest {
 
     @Test
     fun parseEntityToVOTest() {
-        val output: PersonVO = ModelMapperObject.parseObject(inputObject!!.mockEntity(), PersonVO::class.java)
-        assertEquals(0, output.id)
+        val output: PersonVO = DozerMapper.parseObject(inputObject!!.mockEntity(), PersonVO::class.java)
+        assertEquals(0, output.key)
         assertEquals("First Name Test0", output.firstName)
         assertEquals("Last Name Test0", output.lastName)
         assertEquals("Address Test0", output.address)
@@ -30,25 +30,25 @@ class ModelMapperObjectTest {
     @Test
     fun parseEntityListToVOListTest() {
         val outputList: ArrayList<PersonVO> =
-            ModelMapperObject.parseListObject(inputObject!!.mockEntityList(), PersonVO::class.java)
+            DozerMapper.parseListObject(inputObject!!.mockEntityList(), PersonVO::class.java)
 
         val outputZero: PersonVO = outputList[0]
 
-        assertEquals(0, outputZero.id)
+        assertEquals(0, outputZero.key)
         assertEquals("First Name Test0", outputZero.firstName)
         assertEquals("Last Name Test0", outputZero.lastName)
         assertEquals("Address Test0", outputZero.address)
         assertEquals("Male", outputZero.gender)
 
         val outputSeven: PersonVO = outputList[7]
-        assertEquals(7.toLong(), outputSeven.id)
+        assertEquals(7.toLong(), outputSeven.key)
         assertEquals("First Name Test7", outputSeven.firstName)
         assertEquals("Last Name Test7", outputSeven.lastName)
         assertEquals("Address Test7", outputSeven.address)
         assertEquals("Female", outputSeven.gender)
 
         val outputTwelve: PersonVO = outputList[12]
-        assertEquals(12.toLong(), outputTwelve.id)
+        assertEquals(12.toLong(), outputTwelve.key)
         assertEquals("First Name Test12", outputTwelve.firstName)
         assertEquals("Last Name Test12", outputTwelve.lastName)
         assertEquals("Address Test12", outputTwelve.address)
@@ -58,7 +58,7 @@ class ModelMapperObjectTest {
     @Test
     fun parseVOToEntityTest() {
 
-        val output: Person = ModelMapperObject.parseObject(inputObject!!.mockVO(), Person::class.java)
+        val output: Person = DozerMapper.parseObject(inputObject!!.mockVO(), Person::class.java)
 
         assertEquals(0, output.id)
         assertEquals("First Name Test0", output.firstName)
@@ -70,7 +70,7 @@ class ModelMapperObjectTest {
     @Test
     fun parserVOListToEntityListTest() {
 
-        val outputList: ArrayList<Person> = ModelMapperObject.parseListObject(inputObject!!.mockVOList(), Person::class.java)
+        val outputList: ArrayList<Person> = DozerMapper.parseListObject(inputObject!!.mockVOList(), Person::class.java)
 
         val outputZero: Person = outputList[0]
         assertEquals(0, outputZero.id)
