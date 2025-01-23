@@ -49,7 +49,7 @@ class PersonService {
     fun create(person: PersonVO): PersonVO {
         logger.info("Creating one person with name ${person.firstName}")
         val entity: Person = DozerMapper.parseObject(person, Person::class.java)
-        val personVO: PersonVO =  DozerMapper.parseObject(repository.save(entity), PersonVO::class.java)
+        val personVO: PersonVO = DozerMapper.parseObject(repository.save(entity), PersonVO::class.java)
 
         val withSelfRell = linkTo(PersonController::class.java).slash(personVO.key).withSelfRel()
         personVO.add(withSelfRell)
