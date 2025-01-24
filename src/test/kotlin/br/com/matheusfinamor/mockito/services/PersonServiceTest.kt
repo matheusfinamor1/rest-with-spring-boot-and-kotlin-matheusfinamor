@@ -1,7 +1,6 @@
 package br.com.matheusfinamor.mockito.services
 
 import br.com.matheusfinamor.exceptions.RequiredObjectIsNullException
-import br.com.matheusfinamor.mapper.custom.PersonMapper
 import br.com.matheusfinamor.mocks.MockPerson
 import br.com.matheusfinamor.repository.PersonRepository
 import br.com.matheusfinamor.services.PersonService
@@ -27,9 +26,6 @@ class PersonServiceTest {
     @Mock
     private lateinit var repository: PersonRepository
 
-    @Mock
-    private lateinit var mapper: PersonMapper
-
     @BeforeEach
     fun setUp() {
         inputObject = MockPerson()
@@ -38,6 +34,44 @@ class PersonServiceTest {
 
     @Test
     fun findAll() {
+        val list = inputObject.mockEntityList()
+        `when`(repository.findAll()).thenReturn(list)
+
+        val people = service.findAll()
+
+        assertNotNull(people)
+        assertEquals(14, people.size)
+
+        val personOne = people[1]
+        assertNotNull(personOne)
+        assertNotNull(personOne.key)
+        assertNotNull(personOne.links)
+        assertTrue(personOne.links.toString().contains("</person/1>;rel=\"self\""))
+        assertEquals("Address Test1", personOne.address)
+        assertEquals("First Name Test1", personOne.firstName)
+        assertEquals("Last Name Test1", personOne.lastName)
+        assertEquals("Female", personOne.gender)
+
+        val personFour = people[4]
+        assertNotNull(personFour)
+        assertNotNull(personFour.key)
+        assertNotNull(personFour.links)
+        assertTrue(personFour.links.toString().contains("</person/4>;rel=\"self\""))
+        assertEquals("Address Test4", personFour.address)
+        assertEquals("First Name Test4", personFour.firstName)
+        assertEquals("Last Name Test4", personFour.lastName)
+        assertEquals("Male", personFour.gender)
+
+        val personSeven = people[7]
+        assertNotNull(personSeven)
+        assertNotNull(personSeven.key)
+        assertNotNull(personSeven.links)
+        assertTrue(personSeven.links.toString().contains("</person/7>;rel=\"self\""))
+        assertEquals("Address Test7", personSeven.address)
+        assertEquals("First Name Test7", personSeven.firstName)
+        assertEquals("Last Name Test7", personSeven.lastName)
+        assertEquals("Female", personSeven.gender)
+
     }
 
     @Test
