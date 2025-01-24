@@ -1,6 +1,7 @@
 package br.com.matheusfinamor.exceptions.handler
 
 import br.com.matheusfinamor.exceptions.ExceptionResponse
+import br.com.matheusfinamor.exceptions.RequiredObjectIsNullException
 import br.com.matheusfinamor.exceptions.ResourceNotFoundException
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
@@ -33,5 +34,14 @@ class CustomizedResponseEntityExceptionHandler: ResponseEntityExceptionHandler()
             details = request.getDescription(false)
         )
         return ResponseEntity<ExceptionResponse>(exceptionResponse, HttpStatus.NOT_FOUND)
+    }
+    @ExceptionHandler(RequiredObjectIsNullException::class)
+    fun handleBadRequestExceptions(ex: Exception, request: WebRequest): ResponseEntity<ExceptionResponse> {
+        val exceptionResponse = ExceptionResponse(
+            timestamp = Date(),
+            message = ex.message,
+            details = request.getDescription(false)
+        )
+        return ResponseEntity<ExceptionResponse>(exceptionResponse, HttpStatus.BAD_REQUEST)
     }
 }

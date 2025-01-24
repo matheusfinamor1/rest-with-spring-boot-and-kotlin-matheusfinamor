@@ -1,5 +1,6 @@
 package br.com.matheusfinamor.mockito.services
 
+import br.com.matheusfinamor.exceptions.RequiredObjectIsNullException
 import br.com.matheusfinamor.mapper.custom.PersonMapper
 import br.com.matheusfinamor.mocks.MockPerson
 import br.com.matheusfinamor.repository.PersonRepository
@@ -79,6 +80,19 @@ class PersonServiceTest {
         assertEquals("Female", result.gender)
     }
 
+
+    @Test
+    fun createWithNullPerson() {
+        val exception: Exception = assertThrows(
+            RequiredObjectIsNullException::class.java
+        ) { service.create(null) }
+
+        val expectedMessage = "It is not allowed to persist a null object!"
+        val actualMessage = exception.message
+
+        assertTrue(actualMessage!!.contains(expectedMessage))
+    }
+
     @Test
     fun update() {
         val entity = inputObject.mockEntity(1)
@@ -100,6 +114,18 @@ class PersonServiceTest {
         assertEquals("First Name Test1", result.firstName)
         assertEquals("Last Name Test1", result.lastName)
         assertEquals("Female", result.gender)
+    }
+
+    @Test
+    fun updateWithNullPerson() {
+        val exception: Exception = assertThrows(
+            RequiredObjectIsNullException::class.java
+        ) { service.update(null) }
+
+        val expectedMessage = "It is not allowed to persist a null object!"
+        val actualMessage = exception.message
+
+        assertTrue(actualMessage!!.contains(expectedMessage))
     }
 
     @Test

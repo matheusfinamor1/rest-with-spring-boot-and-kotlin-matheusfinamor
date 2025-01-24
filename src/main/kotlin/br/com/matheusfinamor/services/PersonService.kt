@@ -2,6 +2,7 @@ package br.com.matheusfinamor.services
 
 import br.com.matheusfinamor.controller.PersonController
 import br.com.matheusfinamor.data.vo.v1.PersonVO
+import br.com.matheusfinamor.exceptions.RequiredObjectIsNullException
 import br.com.matheusfinamor.exceptions.ResourceNotFoundException
 import br.com.matheusfinamor.mapper.DozerMapper
 import br.com.matheusfinamor.mapper.custom.PersonMapper
@@ -29,7 +30,7 @@ class PersonService {
 
         val persons = repository.findAll()
         val vos = DozerMapper.parseListObject(persons, PersonVO::class.java)
-        for (person in vos){
+        for (person in vos) {
             val withSelfRell = linkTo(PersonController::class.java).slash(person.key).withSelfRel()
             person.add(withSelfRell)
         }
@@ -46,7 +47,9 @@ class PersonService {
         return personVO
     }
 
-    fun create(person: PersonVO): PersonVO {
+    fun create(person: PersonVO?): PersonVO {
+        if (person == null) throw RequiredObjectIsNullException()
+
         logger.info("Creating one person with name ${person.firstName}")
         val entity: Person = DozerMapper.parseObject(person, Person::class.java)
         val personVO: PersonVO = DozerMapper.parseObject(repository.save(entity), PersonVO::class.java)
@@ -56,15 +59,18 @@ class PersonService {
         return personVO
     }
 
-    fun createV2(person: PersonVOV2): PersonVOV2 {
+    fun createV2(person: PersonVOV2?): PersonVOV2 {
+        if (person == null) throw RequiredObjectIsNullException()
+
         logger.info("Creating one person with name ${person.firstName}")
         val entity: Person = mapper.mapVOToEntity(person)
         return mapper.mapEntitytoVo(repository.save(entity))
     }
 
-    fun update(person: PersonVO): PersonVO {
-        logger.info("Updating one person with id ${person.key}")
+    fun update(person: PersonVO?): PersonVO {
+        if (person == null) throw RequiredObjectIsNullException()
 
+        logger.info("Updating one person with id ${person.key}")
         val entity = repository.findById(person.key)
             .orElseThrow { ResourceNotFoundException("No records found for this ID") }
 
