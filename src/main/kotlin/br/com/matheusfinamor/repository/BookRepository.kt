@@ -1,7 +1,7 @@
 package br.com.matheusfinamor.repository
 
-import br.com.matheusfinamor.model.Books
+import br.com.matheusfinamor.model.Book
 import org.springframework.data.jpa.repository.JpaRepository
 
-interface BooksRepository: JpaRepository<Books, Int?> {
+interface BookRepository: JpaRepository<Book, Int?> {
 }

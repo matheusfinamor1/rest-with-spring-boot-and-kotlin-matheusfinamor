@@ -6,7 +6,7 @@ import java.util.Date
 
 @Entity
 @Table(name = "books")
-data class Books(
+data class Book(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     var id: Int = 0,

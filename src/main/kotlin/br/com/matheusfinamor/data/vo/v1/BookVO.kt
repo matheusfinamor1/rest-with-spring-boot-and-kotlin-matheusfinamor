@@ -6,7 +6,7 @@ import org.springframework.hateoas.RepresentationModel
 import java.math.BigDecimal
 import java.util.*
 
-data class BooksVO(
+data class BookVO(
     @Mapping("id")
     @field:JsonProperty("id")
     var key: Int = 0,
@@ -15,4 +15,4 @@ data class BooksVO(
     var launchDate: Date? = null,
     var price: BigDecimal = BigDecimal.ZERO,
     var title: String = ""
-): RepresentationModel<BooksVO>()
+): RepresentationModel<BookVO>()
