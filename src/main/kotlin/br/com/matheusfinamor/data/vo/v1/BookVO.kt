@@ -9,7 +9,7 @@ import java.util.*
 data class BookVO(
     @Mapping("id")
     @field:JsonProperty("id")
-    var key: Int = 0,
+    var key: Long = 0,
     var author: String = "",
     @field:JsonProperty("launch_date")
     var launchDate: Date? = null,
