@@ -1,4 +1,4 @@
-package br.com.matheusfinamor.services
+package br.com.matheusfinamor.service
 
 import br.com.matheusfinamor.controller.BookController
 import br.com.matheusfinamor.data.vo.v1.BookVO
@@ -53,7 +53,7 @@ class BookService {
         val bookVO = repository.save(bookEntity).toBookVO()
 
         val withSelfRell = linkTo(BookController::class.java).slash(bookVO.key).withSelfRel()
-        book.add(withSelfRell)
+        bookVO.add(withSelfRell)
         return bookVO
     }
 

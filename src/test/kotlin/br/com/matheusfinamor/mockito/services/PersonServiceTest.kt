@@ -3,7 +3,7 @@ package br.com.matheusfinamor.mockito.services
 import br.com.matheusfinamor.exceptions.RequiredObjectIsNullException
 import br.com.matheusfinamor.mocks.MockPerson
 import br.com.matheusfinamor.repository.PersonRepository
-import br.com.matheusfinamor.services.PersonService
+import br.com.matheusfinamor.service.PersonService
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test

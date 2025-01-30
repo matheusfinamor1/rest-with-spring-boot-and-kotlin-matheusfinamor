@@ -1,7 +1,7 @@
 package br.com.matheusfinamor.controller
 
 import br.com.matheusfinamor.data.vo.v1.BookVO
-import br.com.matheusfinamor.services.BookService
+import br.com.matheusfinamor.service.BookService
 import io.swagger.v3.oas.annotations.Operation
 import io.swagger.v3.oas.annotations.media.ArraySchema
 import io.swagger.v3.oas.annotations.media.Content

@@ -15,6 +15,7 @@ fun Book.toBookVO(): BookVO {
 
 fun BookVO.toBookEntity(): Book {
     return Book(
+        id = this.key,
         title = this.title,
         price = this.price,
         author = this.author,
