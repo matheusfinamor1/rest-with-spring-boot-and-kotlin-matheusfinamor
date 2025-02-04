@@ -1,4 +1,4 @@
-package br.com.matheusfinamor.services
+package br.com.matheusfinamor.service
 
 import br.com.matheusfinamor.controller.PersonController
 import br.com.matheusfinamor.data.vo.v1.PersonVO

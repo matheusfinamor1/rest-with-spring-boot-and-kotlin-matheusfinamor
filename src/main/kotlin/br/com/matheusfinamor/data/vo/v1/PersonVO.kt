@@ -9,6 +9,7 @@ import org.springframework.hateoas.RepresentationModel
 @JsonPropertyOrder("id","address","first_name", "last_name", "gender")
 data class PersonVO(
     @Mapping("id")
+    @field:JsonProperty("id")
     var key: Long = 0,
     /** altera o nome do atributo do objeto JSON */
     @field:JsonProperty("first_name")

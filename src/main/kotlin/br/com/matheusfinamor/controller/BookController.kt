@@ -1,7 +1,7 @@
 package br.com.matheusfinamor.controller
 
-import br.com.matheusfinamor.data.vo.v1.PersonVO
-import br.com.matheusfinamor.service.PersonService
+import br.com.matheusfinamor.data.vo.v1.BookVO
+import br.com.matheusfinamor.service.BookService
 import io.swagger.v3.oas.annotations.Operation
 import io.swagger.v3.oas.annotations.media.ArraySchema
 import io.swagger.v3.oas.annotations.media.Content
@@ -12,31 +12,28 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.MediaType
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
-import br.com.matheusfinamor.data.vo.v2.PersonVO as PersonVOV2
 
 @RestController
-@RequestMapping("/person")
-@Tag(name = "Person", description = "Endpoints for Maning Person")
-class PersonController() {
+@RequestMapping("/book")
+@Tag(name = "Book", description = "Endpoints for Meaning Book")
+class BookController {
 
-    /** @Autowired Injeta a instancia quando for necessario */
     @Autowired
-    private lateinit var service: PersonService
-
+    private lateinit var service: BookService
 
     @GetMapping(
         value = ["/v1"],
         produces = [MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE]
     )
     @Operation(
-        summary = "Finds all person", description = "Finds all person",
-        tags = ["Person"],
+        summary = "Finds all book", description = "Finds all book",
+        tags = ["Book"],
         responses = [
             ApiResponse(
                 description = "Success",
                 responseCode = "200",
                 content = [
-                    Content(array = ArraySchema(schema = Schema(implementation = PersonVO::class)))
+                    Content(array = ArraySchema(schema = Schema(implementation = BookVO::class)))
                 ]
             ),
             ApiResponse(
@@ -76,7 +73,7 @@ class PersonController() {
             ),
         ]
     )
-    fun findAll(): List<PersonVO> {
+    fun findAll(): List<BookVO> {
         return service.findAll()
     }
 
@@ -85,14 +82,14 @@ class PersonController() {
         produces = [MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE]
     )
     @Operation(
-        summary = "Finds a person", description = "Finds a person",
-        tags = ["Person"],
+        summary = "Finds a book", description = "Finds a book",
+        tags = ["Book"],
         responses = [
             ApiResponse(
                 description = "Success",
                 responseCode = "200",
                 content = [
-                    Content(schema = Schema(implementation = PersonVO::class))
+                    Content(schema = Schema(implementation = BookVO::class))
                 ]
             ),
             ApiResponse(
@@ -132,10 +129,9 @@ class PersonController() {
             ),
         ]
     )
-            /** @PathVariable recupera dados da URL */
     fun findById(
         @PathVariable(value = "id") id: Long
-    ): PersonVO {
+    ): BookVO {
         return service.findById(id)
     }
 
@@ -145,14 +141,14 @@ class PersonController() {
         consumes = [MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE]
     )
     @Operation(
-        summary = "Adds a new person", description = "Adds a new person",
-        tags = ["Person"],
+        summary = "Adds a new book", description = "Adds a new book",
+        tags = ["Book"],
         responses = [
             ApiResponse(
                 description = "Success",
                 responseCode = "200",
                 content = [
-                    Content(schema = Schema(implementation = PersonVO::class))
+                    Content(schema = Schema(implementation = BookVO::class))
                 ]
             ),
             ApiResponse(
@@ -178,23 +174,10 @@ class PersonController() {
             ),
         ]
     )
-            /** @RequestBody recupera dados do Body */
     fun create(
-        @RequestBody person: PersonVO
-    ): PersonVO {
-        return service.create(person)
-    }
-
-    @PostMapping(
-        value = ["/v2"],
-        produces = [MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE],
-        consumes = [MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE]
-    )
-            /** @RequestBody recupera dados do Body */
-    fun createV2(
-        @RequestBody person: PersonVOV2
-    ): PersonVOV2 {
-        return service.createV2(person)
+        @RequestBody book: BookVO
+    ): BookVO {
+        return service.create(book)
     }
 
     @PutMapping(
@@ -203,14 +186,14 @@ class PersonController() {
         consumes = [MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE]
     )
     @Operation(
-        summary = "Updates a person's information", description = "Updates a person's information",
-        tags = ["Person"],
+        summary = "Updates a book's information", description = "Updates a book's information",
+        tags = ["Book"],
         responses = [
             ApiResponse(
                 description = "Success",
                 responseCode = "200",
                 content = [
-                    Content(schema = Schema(implementation = PersonVO::class))
+                    Content(schema = Schema(implementation = BookVO::class))
                 ]
             ),
             ApiResponse(
@@ -250,11 +233,10 @@ class PersonController() {
             ),
         ]
     )
-            /** @RequestBody recupera dados do Body */
     fun update(
-        @RequestBody person: PersonVO
-    ): PersonVO {
-        return service.update(person)
+        @RequestBody book: BookVO
+    ): BookVO {
+        return service.update(book)
     }
 
     @DeleteMapping(
@@ -262,8 +244,8 @@ class PersonController() {
         produces = [MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE]
     )
     @Operation(
-        summary = "Deletes a person", description = "Deletes a person",
-        tags = ["Person"],
+        summary = "Deletes a book", description = "Deletes a book",
+        tags = ["Book"],
         responses = [
             ApiResponse(
                 description = "No Content",
@@ -302,9 +284,11 @@ class PersonController() {
             ),
         ]
     )
-            /** @PathVariable recupera dados da URL */
-    fun delete(@PathVariable(value = "id") id: Long): ResponseEntity<*> {
+    fun delete(
+        @PathVariable(value = "id") id: Long
+    ): ResponseEntity<*> {
         service.delete(id)
         return ResponseEntity.noContent().build<Any>()
     }
+
 }
