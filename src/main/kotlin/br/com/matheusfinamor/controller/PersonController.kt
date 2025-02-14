@@ -14,6 +14,7 @@ import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 import br.com.matheusfinamor.data.vo.v2.PersonVO as PersonVOV2
 
+//@CrossOrigin
 @RestController
 @RequestMapping("/person")
 @Tag(name = "Person", description = "Endpoints for Maning Person")
@@ -80,6 +81,7 @@ class PersonController() {
         return service.findAll()
     }
 
+    @CrossOrigin(origins = ["http://localhost:8080"])
     @GetMapping(
         value = ["/v1/{id}"],
         produces = [MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE]
@@ -139,6 +141,7 @@ class PersonController() {
         return service.findById(id)
     }
 
+    @CrossOrigin(origins = ["http://localhost:8080", "https://matheus.finamor.com.br"])
     @PostMapping(
         value = ["/v1"],
         produces = [MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE],
