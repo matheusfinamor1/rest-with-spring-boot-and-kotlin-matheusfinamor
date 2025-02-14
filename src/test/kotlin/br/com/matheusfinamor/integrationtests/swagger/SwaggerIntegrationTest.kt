@@ -1,6 +1,6 @@
 package br.com.matheusfinamor.integrationtests.swagger
 
-import br.com.matheusfinamor.integrationtests.ConfigsTest
+import br.com.matheusfinamor.integrationtests.TestConfigs
 import br.com.matheusfinamor.integrationtests.testcontainers.AbstractIntegrationTest
 import io.restassured.RestAssured
 import org.junit.jupiter.api.Assertions.assertTrue
@@ -14,7 +14,7 @@ class SwaggerIntegrationTest() : AbstractIntegrationTest() {
     fun shouldDisplaySwaggerUiPage() {
         val content = RestAssured.given()
             .basePath("/swagger-ui.html")
-            .port(ConfigsTest.SERVER_PORT)
+            .port(TestConfigs.SERVER_PORT)
             .`when`()
             .get()
             .then()
